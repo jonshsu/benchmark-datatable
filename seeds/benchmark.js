@@ -6,7 +6,7 @@ function createBenchmark() {
   return {
     create_time: faker.date.recent(10),                       // random datetime in the last 10 days
     commit_hash: faker.random.uuid().slice(0,8),              // random alphanumeric hash string
-    branch_name: (Math.random() < 0.5 ? "Master" : "Dev"),    // half Master, Dev branch
+    branch_name: (Math.random() < 0.5 ? "Master" : "Dev"),    // half Master, half Dev branch
     os: (Math.random() < 0.5 ? "Android" : "iOS"),            // half Android, half iOS
     cpu: (Math.random() < 0.1 ? Math.random() * 5 + 30 : Math.random() * 30),   // 1/10 greater than 30, 9/10 less than 30
     mem: (Math.random() < 0.1 ? Math.random() * 10 + 10 : Math.random() * 10),  // 1/10 greater than 10, 9/10 less than 10
