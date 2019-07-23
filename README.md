@@ -6,12 +6,14 @@ This website displays a sortable, searchable, paginated datatable with server-si
 Frontend:
  - [DataTables](https://datatables.net/) jQuery library
  - Bootstrap
+ - `index.html` and `javascript.js` in `/public`
 
 Backend: 
  - Google App Engine
  - Node.js/Express
  - [Knex](https://www.npmjs.com/package/knex)/MySQL for migration, seeding and querying
  - [Faker.js](https://www.npmjs.com/package/faker) for random data
+ - `app.js` is main server with request handlers, `database.js` connects to the database, `knexfile.js` sets up Knex for seeding/migration
 
 Database: 
  - Google Cloud Sql (MySql)
