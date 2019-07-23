@@ -19,7 +19,7 @@ exports.seed = (knex, Promise) => {
   .then( function() {
     let benchmarks = [];
 
-    for (let i = 1; i < 2000; i++) {
+    for (let i = 0; i < 2000; i++) {
       benchmarks.push(createBenchmark())
     }
 
