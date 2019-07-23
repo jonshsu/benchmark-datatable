@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>Jonathan Hsu</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+		<!-- datatables -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.css"/>
+	</head>
+
+	<body class="container">
+		<div class="row align-items-center mt-2">
+			<div class="col-sm-6"><h1 class="h2">Benchmark Data</h1></div>
+			<div class="col-sm-6 text-right"><a class="" href="https://github.com/jonshsu/benchmark-datatable" target="_new">Github</a></div>
+		</div>
+
+		<!-- table -->
+		<div class="table mb-2">
+			<table class="table table-sm table-striped table-hover" id="datatable">
+				<thead>
+					<tr>
+						<th id="id">id</th>
+						<th id="create_time">Create Time</th>
+						<th id="commit_hash">Commit Hash</th>
+						<th id="branch_name">Branch Name</th>
+						<th id="os">OS</th>
+						<th id="cpu%">CPU %</th>
+						<th id="mem%">Memory %</th>
+						<th id="note">Note</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- datatables -->
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js"></script>
+
+		<!-- load table -->
+		<script type="text/javascript" src="javascript.js"></script>
+	</body>
+
+</html>
