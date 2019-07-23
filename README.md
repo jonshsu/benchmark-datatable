@@ -1,5 +1,5 @@
 # Benchmark Datatable
-[Website Link](https://solid-daylight-247504.appspot.com/)  
+[Website Link](https://benchmark.jonathanhsu.me/)  
 This website displays a sortable, searchable, paginated datatable with server-side processing and randomly seeded benchmark data. Rows where CPU % > 30 are highlighted red. 
 
 ### Tools used
@@ -24,4 +24,4 @@ The DataTable is initialized with the jQuery library and sends an Ajax request t
 The server queries the database for: total number of rows, number of rows after filtering (searching), entry (row) data. These are sent back and the table is populated. 
 
 ### Notes
-Default sort is by time. 1/10 of entries have CPU > 30%. 1/0 of entries have Notes. Search by time using the format `2006-04-25T23:59:03.244Z`
+Default sort is by time. 1/10 of entries have CPU > 30%. 1/10 of entries have Notes. Search by time using the format `2006-04-25T23:59:03.244Z`
