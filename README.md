@@ -26,4 +26,4 @@ The DataTable is initialized with the jQuery library and sends an Ajax request t
 The server queries the database for: total number of rows, number of rows after filtering (searching), entry (row) data. These are sent back and the table is populated. 
 
 ### Notes
-Default sort is by time. 1/10 of entries have CPU > 30%. 1/10 of entries have Notes. Search by time using the format `2006-04-25T23:59:03.244Z`
+Default sort is by time. 1/10 of entries have CPU > 30%. 1/10 of entries have Notes. Search by time using the format `2006-04-25T23:59:03.244Z`. Search uses basic string matching. 
