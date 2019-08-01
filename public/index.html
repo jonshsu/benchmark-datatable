@@ -14,10 +14,132 @@
 	</head>
 
 	<body class="container">
+
+		<!-- heading/title -->
 		<div class="row align-items-center mt-2">
 			<div class="col-sm-6"><h1 class="h2">Benchmark Data</h1></div>
 			<div class="col-sm-6 text-right"><a class="" href="https://github.com/jonshsu/benchmark-datatable" target="_new">Github</a></div>
 		</div>
+
+		
+		<!-- expand area -->
+		<div id="accordion" class="mb-3">
+
+			<!-- insert data -->
+			<div class="card mb-2">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						Insert Row
+						</button>
+					</h5>
+				</div>
+
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="card-body">
+
+						<!-- input elems -->
+						<div class="row">
+							<div class="input-group mb-3 col-sm-4">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Commit Hash</span>
+								</div>
+								<input id="commit_hash" type="text" class="form-control" placeholder="a1b2c3d4" aria-label="commit_hash" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3 col-sm-4">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Branch Name</label>
+								</div>
+								<select class="custom-select" id="branch_name">
+									<option selected value="Dev">Dev</option>
+									<option value="Master">Master</option>
+									<option value="Test">Test</option>
+								</select>
+							</div>
+
+							<div class="input-group mb-3 col-sm-4">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">OS</label>
+								</div>
+								<select class="custom-select" id="os">
+									<option selected value="iOS">iOS</option>
+									<option value="Android">Android</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-group mb-3 col-sm-6">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">CPU and Memory</span>
+								</div>
+								<input id="cpu" type="text" class="form-control" placeholder="cpu% (12.34)" aria-label="cpu" aria-describedby="basic-addon1">
+								<input id="mem" type="text" class="form-control" placeholder="mem% (12.34)" aria-label="mem" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3 col-sm-6">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Note</span>
+								</div>
+								<input id="note" type="text" class="form-control" placeholder="Lorem Ipsum" aria-label="note" aria-describedby="basic-addon1">
+							</div>
+						</div>
+
+						<div class="btn-group mr-2" role="group" aria-label="First group">
+							<button type="button" class="btn btn-primary" onclick="randomizeFields()">Randomize Fields</button>
+						</div>
+						<div class="btn-group mr-2" role="group" aria-label="First group">
+							<button type="button" class="btn btn-primary" onclick="insertRow()">Insert</button>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+			<!-- visualize data -->
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+						Visualize
+						</button>
+					</h5>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div class="card-body">
+						<!-- picktime -->
+						<div class="input-group mb-3">  <!-- col-sm-6 -->
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Start/End Time</span>
+							</div>
+							<input id="startTime" type="text" class="form-control" placeholder="startTime" aria-label="startTime" aria-describedby="basic-addon1">
+							<input id="endTime" type="text" class="form-control" placeholder="endTime" aria-label="endTime" aria-describedby="basic-addon1">
+						</div>
+
+						<!-- send query -->
+						<div class="input-group mb-3">
+							<div class="row col-sm-12">
+								<button type="button" class="btn btn-primary" onclick="queryRows()">Query</button>
+							</div>
+
+							<!-- chart with data -->
+							<div class="row col-sm-12" id="chart_container">
+								<canvas id="mychart" width="800" height="400" style="height:0;"></canvas>
+							</div>
+							<div class="row" id="responsedata">
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
 
 		<!-- table -->
 		<div class="table mb-2">
@@ -41,6 +163,15 @@
 
 		<!-- datatables -->
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js"></script>
+
+		<!-- bootstrap js -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+		<!-- moment js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+		<!-- chart js -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
 		<!-- load table -->
 		<script type="text/javascript" src="javascript.js"></script>
