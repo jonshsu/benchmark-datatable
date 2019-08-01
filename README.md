@@ -1,5 +1,5 @@
 # Benchmark Datatable
-[Website Link](https://benchmark.jonathanhsu.me/)  
+[Website Link](https://solid-daylight-247504.appspot.com/)  
 This website displays a sortable, searchable, paginated datatable with server-side processing and randomly seeded benchmark data. Rows where CPU % > 30 are highlighted red. 
 
 ### Tools used
