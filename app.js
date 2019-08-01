@@ -5,6 +5,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database')
+const rateLimit = require("express-rate-limit");
+
+// Rate Limiter
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 1000 // limit each IP to 10-0 requests per windowMs
+});
 
 // serve frontend files
 app.use(express.static('public'));
@@ -57,8 +64,70 @@ function selectData(err, results, fields, req, res, recordsTotal, recordsFiltere
 	res.send(sendback);
 }
 
+
+// handler to send back filtered row data
+function getData(req, res) {
+
+	if(req.query.startTime != undefined && req.query.startTime != undefined) {
+
+		let starttime = new Date(req.query.startTime);
+		let endtime = new Date(req.query.endTime);
+
+		let sqlquery = "SELECT * FROM benchmark WHERE create_time BETWEEN ? AND ? ORDER BY create_time desc";
+		let values = [starttime, endtime];
+
+		connection.query(sqlquery, values, function(err, result) {
+			if(err) {
+				throw err;
+				res.send("Data not found.")
+				res.status(404);
+			}
+			else {
+				res.send(result);
+				res.status(200);
+			}
+		})
+	}
+	else {
+		console.log("Invalid query.");
+		res.send("Invalid query.");
+		res.status(400)
+	}
+
+}
+
+// Insert data into benchmark
+function insertData(req, res) {
+	let sqlquery = "INSERT INTO benchmark(create_time, commit_hash, branch_name, os, cpu, mem, note) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	let new_datetime = new Date(); 
+	
+	// validate body
+	if(req.body.commit_hash==undefined || req.body.branch_name==undefined || req.body.os==undefined || req.body.cpu==undefined || req.body.mem==undefined) {
+		console.log("Invalid query.");
+		res.send("Invalid query.");
+		res.status(400);
+	}
+	else {
+		let values = [new_datetime, req.body.commit_hash, req.body.branch_name, req.body.os, req.body.cpu, req.body.mem, req.body.note];
+
+		// insert data
+		connection.query(sqlquery, values, function(err, result) {
+			if (err) {
+				throw err;
+				res.send("Could not insert data.");
+				res.status(503);
+			}
+			else {
+				// console.log("Inserted: ", values);
+				res.send("Inserted data.");
+				res.status(201);
+			}
+		});
+	}
+}
+
 // handler for datatable
-app.get('/benchmark', function(req, res, next) {
+app.get('/datatable', function(req, res, next) {
 	searchquery = "";
 	const names = ['id', 'create_time', 'commit_hash', 'branch_name', 'os', 'cpu', 'mem', 'note'];
 	
@@ -76,6 +145,12 @@ app.get('/benchmark', function(req, res, next) {
 	connection.query("SELECT COUNT(*) AS total FROM benchmark", 
 		(err, rows, fields) => {totalRows(err, rows, fields, req, res, names, searchquery)});
 });
+
+app.route('/data')
+	.get(getData) // handler for querying
+	.post(insertData); // handler for inserting
+
+app.post('/')
 
 // port
 const PORT = process.env.PORT || 8080;
